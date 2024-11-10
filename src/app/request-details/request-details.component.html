@@ -1,0 +1,50 @@
+<div class="container-fluid mt-2" data-bs-theme="light">
+  <div class="container">
+    <div class="container">
+      <div class="card shadow rounded">
+        <div class="card-header">
+          <h1>{{formTitle}}</h1>
+        </div>
+        <div class="card-body">
+          <form #myForm="ngForm" >
+            <!--User Name-->
+            <div class="mb-3">
+              <label class="form-label" for="txtTitle">User Profile</label>
+              <input type="text" id="txtTitle"
+                     name="txtTitle"
+                     class="form-control"
+                     [(ngModel)]="request.user"
+                     #user="ngModel"
+                     readonly
+                     placeholder="{{userName}}"
+              >
+            </div>
+
+            <!--date-->
+            <div class="mb-3">
+              <label for="txtDate" class="form-label"> Date </label>
+              <input id="txtDate" name="txtDate" type="date" class="form-control"
+                     [(ngModel)]="request.date"
+                     #date="ngModel"
+                     required
+                     [min]="MIN_DATE"
+                     placeholder="{{request.date}}"
+              >
+              @if (date.invalid && (date.touched || date.dirty)) {
+                @if (date.errors?.['required']) {
+                  <small class="text-danger">Date is required and must be in the future</small>
+                }
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="txtComment" class="form-label">Comment</label>
+              <textarea id="txtComment" name="txtComment" class="form-control"
+                        [(ngModel)]="request.message"
+                        #message="ngModel"
+                        required>
+                        <!--comment-->
+                        </textarea>
+            </div>
+            <button [disabled]="myForm.invalid" type="button" class="btn btn-primary" (click)="btnUpdate_click()">Update</button>
+          </form>

@@ -1,0 +1,144 @@
+<div class="container-fluid mt-5" data-bs-theme="light">
+  <div class="container">
+    <div class="container">
+      <div class="card shadow rounded">
+        <div class="card-header">
+          <h1>{{formTitle}}</h1>
+        </div>
+        <div class="card-body">
+          <form #myForm="ngForm" >
+            <!--title-->
+            <div class="mb-3">
+              <label class="form-label" for="txtTitle">Title</label>
+              <input type="text" id="txtTitle"
+                     name="txtTitle"
+                     class="form-control"
+                     [(ngModel)]="occasion.title"
+                     #title="ngModel"
+                     required
+                     [minlength]="MIN_LENGTH"
+              >
+              @if(title.invalid && (title.touched || title.dirty)){
+                @if(title.errors?.['required']){
+                  <small class="text-danger">Title is REQUIRED</small> <br>
+                }
+                @if(title.errors?.['minlength']){
+                  <small class="text-danger">Title must be at least {{MIN_LENGTH}} CHARACTERS</small> <br>
+                }
+              }
+            </div>
+
+            <!--organiser-->
+            <div class="mb-3">
+              <label for="txtDeveloper" class="form-label"> Organiser/Venue </label>
+              <input id="txtDeveloper" name="txtDeveloper" type="text" class="form-control"
+                     [(ngModel)]="occasion.organiser"
+                     #developer="ngModel"
+                     required
+              >
+              @if (developer.invalid && (developer.touched || developer.dirty)) {
+                @if (developer.errors?.['required']) {
+                  <small class="text-danger">Organiser/Venue is required</small>
+                }
+              }
+            </div>
+
+            <!--type-->
+            <div class="mb-3">
+              <label for="cmbGenre" class="form-label"> Type </label>
+              <select id="cmbGenre" name="cmbGenre" class="form-control"
+                      [(ngModel)]="occasion.type"
+                      #type="ngModel"
+                      required
+              >
+                @for (item of types; track item){
+                  <option [value]="item">{{item}}</option>
+                }
+              </select>
+              @if (type.invalid && (type.touched || type.dirty)) {
+                @if (type.errors?.['required']) {
+                  <small class="text-danger">Genre is required</small>
+                }
+              }
+            </div>
+
+            <!--price-->
+            <div class="mb-3">
+              <label for="txtPrice" class="form-label"> Price </label>
+              <input type="number" id="txtPrice" name="txtPrice" class="form-control"
+                     [(ngModel)]="occasion.price"
+                     #price="ngModel"
+                     required
+                     [min]="MIN_PRICE"
+              >
+              <!--                     pattern="^\d{2}$"-->
+              @if (price.invalid && (price.touched || price.dirty)) {
+                @if (price.errors?.['required']) {
+                  <small class="text-danger">Price is required</small>
+                }
+                @if (price.errors?.['pattern']) {
+                  <small class="text-danger">Pattern does not match(only 2 digits permitted)</small>
+                  <br>
+                }
+                @if (price.errors?.['min']) {
+                  <small class="text-danger">Price must be at least {{ MIN_PRICE }}</small>
+                }
+              }
+            </div>
+
+            <!--  [(ngModel)]="occasion.address"
+                     #address="ngModel"-->
+            <!--                     (change)="handlePlaceDetails($event)"-->
+            <!--address-->
+            <div class="mb-3">
+              <label for="txtAddress" class="form-label"> Address </label>
+              <input id="txtAddress" name="txtAddress" type="text" class="form-control"
+                     required
+                     (change)="setAddress()"
+              >
+             <!-- @if (address.invalid && (address.touched || address.dirty)) {
+                @if (address.errors?.['required']) {
+                  <small class="text-danger">Address is Required</small>
+                }
+              }-->
+            </div>
+
+
+            <!--date-->
+            <div class="mb-3">
+              <label for="txtDate" class="form-label"> Date </label>
+              <input id="txtDate" name="txtDate" type="date" class="form-control"
+                     [(ngModel)]="occasion.date"
+                     #date="ngModel"
+                     required
+                     [min]="MIN_DATE"
+              >
+              @if (date.invalid && (date.touched || date.dirty)) {
+                @if (date.errors?.['required']) {
+                  <small class="text-danger">Date is required and must be in the future</small>
+                }
+              }
+            </div>
+
+
+            <div class="mb-3">
+              <label for="txtComment" class="form-label">Comment</label>
+              <textarea id="txtComment" name="txtComment" class="form-control"
+                        [(ngModel)]="occasion.comments"
+                        #comment="ngModel"
+                        required>
+                        <!--comment-->
+                        </textarea>
+            </div>
+
+<!--            <p>Add an IMAGE (native feature TO DO)</p>-->
+            <app-camera></app-camera>
+
+            <button [disabled]="myForm.invalid" type="button" class="btn btn-primary" (click)="btnSave_click()">Save</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

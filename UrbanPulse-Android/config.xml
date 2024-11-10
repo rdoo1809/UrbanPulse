@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Urban Pulse</name>
+    <description>Event Finder App - uses user location to find great events for them!</description>
+    <author email="schhetri8478@conestogac.on.ca" href="">
+        Sapana Chiettri
+    </author>
+  <author email="rdooley5@outlook.com" href="https://rjdooley.ca/">
+    Ryan Dooley
+  </author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />a
+
+  <!--splash screen and icon-->
+  <platform name="android">
+    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="splash.png"/>
+    <preference name="AndroidWindowSplashScreenBackground" value="#000000" />
+    <preference name="SplashScreenDelay" value="1000"/>
+  </platform>
+  <icon src="/www/assets/images/logo.png" />
+</widget>

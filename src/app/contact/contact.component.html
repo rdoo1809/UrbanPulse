@@ -1,0 +1,62 @@
+<br>
+<div class="container-fluid">
+  <h3>Need Support?</h3>
+  <p>Our team is here to help you with your account!</p>
+  <p>Don't have an account? <a href="/settings">Click Here</a> </p>
+</div>
+
+<div class="container-fluid mt-2" data-bs-theme="light">
+  <div class="container">
+    <div class="container">
+      <div class="card shadow rounded">
+        <div class="card-header">
+          <h1>{{formTitle}}</h1>
+        </div>
+        <div class="card-body">
+          <form #myForm="ngForm" >
+            <!--User Name-->
+            <div class="mb-3">
+              <label class="form-label" for="txtTitle">User Profile</label>
+              <input type="text" id="txtTitle"
+                     name="txtTitle"
+                     class="form-control"
+                     [(ngModel)]="contact.user"
+                     #user="ngModel"
+                     readonly
+                     placeholder="{{userName}}"
+              >
+            </div>
+
+            <!--date-->
+            <div class="mb-3">
+              <label for="txtDate" class="form-label"> Date </label>
+              <input id="txtDate" name="txtDate" type="date" class="form-control"
+                     [(ngModel)]="contact.date"
+                     #date="ngModel"
+                     required
+                     [min]="MIN_DATE"
+              >
+              @if (date.invalid && (date.touched || date.dirty)) {
+                @if (date.errors?.['required']) {
+                  <small class="text-danger">Date is required and must be in the future</small>
+                }
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="txtComment" class="form-label">Comment</label>
+              <textarea id="txtComment" name="txtComment" class="form-control"
+                        [(ngModel)]="contact.message"
+                        #message="ngModel"
+                        required>
+                        <!--comment-->
+                        </textarea>
+            </div>
+            <button [disabled]="myForm.invalid" type="button" class="btn btn-primary" (click)="btnSave_click()">Save</button>
+          </form>
+        </div>
+      </div>
+      <button type="button" class="mt-2 btn btn-primary" (click)="show_requests()">Show My Contact Requests</button>
+    </div>
+  </div>
+</div>

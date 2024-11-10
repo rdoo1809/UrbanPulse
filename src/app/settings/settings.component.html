@@ -1,0 +1,103 @@
+<!--<button type="button" class="btn btn-danger" (click)="deleteAll()">Clear All Data</button>-->
+<div class="container-fluid mt-5" data-bs-theme="light">
+  <div class="container">
+    <div class="container">
+      <div class="card shadow rounded">
+        <div class="card-header">
+          <h1>Create Account</h1>
+        </div>
+        <div class="card-body">
+          <!-- Profile Creation Form -->
+          <form #myForm="ngForm">
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label class="form-label" for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" class="form-control" #fullName="ngModel"
+                     [(ngModel)]="user.fullName" required>
+              @if (fullName.invalid && (fullName.touched || fullName.dirty)) {
+                @if (fullName.errors?.['required']) {
+                  <small class="text-danger">Full Name is REQUIRED</small> <br>
+                }
+              }
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" email required>
+              @if (email.invalid && (email.touched || email.dirty)) {
+                @if (email.errors?.['required']) {
+                  <small class="text-danger">Email is REQUIRED</small> <br>
+                }
+                @if (email.errors?.['email']) {
+                  <small class="text-danger">Email must be in Proper Format</small> <br>
+                }
+              }
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" id="password" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password"
+                     required>
+              @if (password.invalid && (password.touched || password.dirty)) {
+                @if (password.errors?.['required']) {
+                  <small class="text-danger">Password is REQUIRED</small> <br>
+                }
+              }
+            </div>
+
+            <!-- Save Button -->
+            <button [disabled]="myForm.invalid" type="button" class="btn btn-primary" (click)="btnSave_click()">Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2>List of Users</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let user of users">
+          <button type="button" id="btnModify" class="btn btn-primary btn-sm"
+                  (click)="onModifyClick(user)">
+            Modify
+          </button>
+          <button type="button" id="btnDelete" class="btn btn-danger btn-sm"
+                  (click)="onDeleteClick(user)">
+            Delete
+          </button>
+          <button type="button" id="btnSelect" class="btn btn-secondary btn-sm"
+                  (click)="onSelect(user)">
+            select
+          </button>
+          <br>
+          <span>{{ user.fullName }}</span>
+          <span class="badge bg-secondary" style="float: right">{{ user.email }}</span>
+        </li>
+        <li class="list-group-item" *ngIf="users.length === 0">
+          <h4>No users found</h4>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- Clear All Data Button -->
+<div class="text-center mt-5">
+  <button type="button" class="btn btn-danger" (click)="deleteAll()">Clear All App Data</button>
+</div>
+
+
+
+
+
+
+

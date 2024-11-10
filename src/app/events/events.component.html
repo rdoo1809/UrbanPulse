@@ -1,0 +1,26 @@
+<br>
+<h1 style="text-align: center; color: white">Events in Your City</h1>
+<br>
+
+
+@for(occ of occasions; track $index){
+  <div class="card container-fluid mb-5" style="width: 18rem;" data-bs-theme="light">
+    <img class="card-img-top" src="{{occ.image}}">
+    <div class="card-body">
+      <h5 class="card-title">{{occ.title}}</h5>
+      <p class="card-text">{{occ.date}}</p>
+    </div>
+
+    <div class="card-body">
+      <button type="button" id="btnDelete"
+              class="btn btn-lg btn-primary ms-5"
+              (click)="showOneEvent(occ)">
+        Event Details</button>
+   </div>
+    <button type="button" class="btn btn-info" (click)="addToList(occ)" [disabled]="isInList()" >Add to List</button>
+<br>
+  </div>
+}@empty{
+  No Events to show
+}
+

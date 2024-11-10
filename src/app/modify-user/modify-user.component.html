@@ -1,0 +1,57 @@
+<div class="container-fluid mt-5" data-bs-theme="light">
+  <div class="container">
+    <div class="container">
+      <div class="card shadow rounded">
+        <div class="card-header">
+          <h1>{{ formTitle }}</h1>
+        </div>
+        <div class="card-body">
+          <!-- Profile Creation Form -->
+          <form #myForm="ngForm">
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label class="form-label" for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" class="form-control" #fullName="ngModel"
+                     [(ngModel)]="user.fullName" required>
+              @if (fullName.invalid && (fullName.touched || fullName.dirty)) {
+                @if (fullName.errors?.['required']) {
+                  <small class="text-danger">Full Name is REQUIRED</small> <br>
+                }
+              }
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" email required>
+              @if (email.invalid && (email.touched || email.dirty)) {
+                @if (email.errors?.['required']) {
+                  <small class="text-danger">Email is REQUIRED</small> <br>
+                }
+                @if (email.errors?.['email']) {
+                  <small class="text-danger">Email must be in Proper Format</small> <br>
+                }
+              }
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input type="text" id="password" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password"
+                     required>
+              @if (password.invalid && (password.touched || password.dirty)) {
+                @if (password.errors?.['required']) {
+                  <small class="text-danger">Password is REQUIRED</small> <br>
+                }
+              }
+            </div>
+
+            <!-- Save Button -->
+            <button [disabled]="myForm.invalid" type="button" class="btn btn-primary" (click)="btnSave_click()">Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

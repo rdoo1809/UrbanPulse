@@ -1,0 +1,13 @@
+<div id="pageCamera" data-role="page">
+  <header data-role="header" data-theme="a" data-position="fixed">
+    <p>Attach an Image to this Event</p>
+  </header>
+  <section data-role="content">
+    <button type="button" id="btnCapturePhoto" (click)="capturePhoto()" name="btnCapturePhoto" class="btn btn-sm btn-primary me-2">Capture Photo
+    </button>
+    <button type="button" id="btnLoadFromLibrary" (click)="loadPhoto()" name="btnLoadFromLibrary" class="btn btn-sm btn-info">Load from Photo Library
+    </button>
+    <label id="lblMessage"></label>
+    <img id="imgSnap" class="mb-2" src="" width="100%" height="100%" alt="Photo loads here">
+  </section>
+</div>
